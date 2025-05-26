@@ -1,0 +1,75 @@
+services:
+  postgres:
+    container_name: eMarket-postgresql
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - eMarket-net
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: eMarket-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    networks:
+      - eMarket-net
+    restart: unless-stopped
+
+  mongodb:
+    container_name: eMarket-mongodb
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - eMarket-net
+
+  mongo-express:
+    container_name: eMarket-mongo-express
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: username
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongodb #mongo db service defined above
+    networks:
+      - eMarket-net
+
+  mail-dev:
+    container_name: eMarket-mail-dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      - eMarket-net
+
+
+networks:
+  eMarket-net:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
+  mongo:

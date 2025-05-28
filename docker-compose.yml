@@ -54,6 +54,8 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongodb #mongo db service defined above
     networks:
       - eMarket-net
+    depends_on:
+      - mongodb
 
   mail-dev:
     container_name: eMarket-mail-dev

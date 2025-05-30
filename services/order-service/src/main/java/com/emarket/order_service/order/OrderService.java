@@ -8,9 +8,13 @@ import com.emarket.order_service.orderline.OrderLineRequest;
 import com.emarket.order_service.orderline.OrderLineService;
 import com.emarket.order_service.product.ProductClient;
 import com.emarket.order_service.purchase.PurchaseRequest;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +49,8 @@ public class OrderService {
             );
         }
 
+        //TODO payment
+
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
                         request.reference(),
@@ -58,4 +64,18 @@ public class OrderService {
 
         return order.getId();
     }
+
+    public List<OrderResponse> findAllOrders() {
+        return repository.findAll()
+                .stream()
+                .map(orderMapper::toOrderResponse)
+                .collect(Collectors.toList());
+    }
+
+    public OrderResponse findById(Integer orderId) {
+        return repository.findById(orderId)
+                .map(orderMapper::toOrderResponse)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("NO ORDER FOUND WITH THE PROVIDED ID: %d", orderId)));
+    }
+
 }

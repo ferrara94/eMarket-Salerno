@@ -7,7 +7,7 @@ spring:
   jpa:
     hibernate:
       # validate -> we'll rely on Flyway
-      ddl-auto: validate
+      ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   kafka:
@@ -17,6 +17,5 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: paymentConfirmation:com.emarket.payment_service.notification.PaymentNotificationRequest
-
-  server:
-    port: 8060
+server:
+  port: 8060

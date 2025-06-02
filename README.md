@@ -7,3 +7,12 @@
 **Shop smart, shop Salerno! 🛒** 
 
 ----
+
+## 🛠️ Architecture 
+This project follows a **Microservice Architecture** pattern, designed to promote scalability, modularity, and maintainability. 
+
+The architecture is composed of the following key components:
+ - 📦 Microservices  
+ - 🗂️ Configuration Service
+ - 🔍 Discovery Service
+ - 🌐 API Gateway

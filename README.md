@@ -16,3 +16,25 @@ The architecture is composed of the following key components:
  - 🗂️ Configuration Service
  - 🔍 Discovery Service
  - 🌐 API Gateway
+
+### 🔄 Communication
+
+The application uses both synchronous and asynchronous communication:
+ - 📞 Synchronous (REST) 
+ - 📨 Asynchronous (Messaging)
+
+---
+
+## Technologies Used
+
+### Backend
+- Spring Boot
+- Spring Data JPA
+- Spring Data MongoDB
+- Spring Validation
+- Spring Cloud Config
+- Spring Cloud Gateway
+- Spring Cloud OpenFeign
+- Eureka Server
+- Flyway
+- Docker

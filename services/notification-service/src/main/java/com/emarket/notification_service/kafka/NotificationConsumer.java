@@ -24,7 +24,7 @@ public class NotificationConsumer {
 
     @KafkaListener(topics = "payment-topic")
     public void consumePaymentSuccessNotification(PaymentConfirmation paymentConfirmation) throws MessagingException {
-        log.info(String.format("CONSUMING MESSAGE FROM PAYMENT-TOPIC - %",paymentConfirmation));
+        log.info("CONSUMING MESSAGE FROM PAYMENT-TOPIC - {}", paymentConfirmation);
 
         repository.save(
                 Notification.builder()
@@ -46,7 +46,8 @@ public class NotificationConsumer {
 
     @KafkaListener(topics = "order-topic")
     public void consumeOrderConfirmationNotification(OrderConfirmation orderConfirmation) throws MessagingException {
-        log.info(String.format("CONSUMING MESSAGE FROM ORDER-TOPIC - %",orderConfirmation));
+        log.info("CONSUMING MESSAGE FROM ORDER-TOPIC - {}", orderConfirmation);
+
 
         repository.save(
                 Notification.builder()

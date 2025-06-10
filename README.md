@@ -38,3 +38,5 @@ The application uses both synchronous and asynchronous communication:
 - Eureka Server
 - Flyway
 - Docker
+- Zipkin
+- Keycloak

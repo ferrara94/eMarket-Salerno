@@ -10,3 +10,11 @@ spring:
           search-locations: classpath:/configurations
 server:
   port: 8888
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0 # 100%
+#  zipkin:
+#    tracing:
+#      endpoint:
